@@ -21,6 +21,9 @@ private:
 	sf::Texture bgtex;
 	sf::Sprite bg;
 
+	sf::Texture wintex;
+	sf::Sprite win;
+
 	sf::View view;
 
 	sf::RenderWindow m_window; // main SFML window

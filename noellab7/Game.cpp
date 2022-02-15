@@ -38,6 +38,10 @@ void Game::processEvents()
 		{
 			m_exitGame = true;
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			setup();
+		}
 		player.ProcessKeys();
 	}
 }
@@ -49,10 +53,21 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	if (level.reset) setup();
-	player.Update(level);
-	view.setCenter(player.GetPosition().x , 300);
-	bg.setPosition(view.getCenter());
+	if (!player.win)
+	{
+		if (level.reset) setup();
+		player.Update(level);
+		view.setCenter(player.GetPosition().x, 300);
+		bg.setPosition(view.getCenter());
+		if (player.dead)
+		{
+			setup();
+		}
+	}
+	else
+	{
+		win.setPosition(view.getCenter() - sf::Vector2f(win.getGlobalBounds().width / 2, win.getGlobalBounds().height / 2));
+	}
 }
 
 // draw the frame and then switch buffers
@@ -65,6 +80,11 @@ void Game::render()
 	level.draw(m_window);
 	player.Draw(m_window);
 
+	if (player.win)
+	{
+		m_window.draw(win);
+	}
+
 	m_window.display();
 }
 
@@ -72,6 +92,8 @@ void Game::setup()
 {
 	bgtex.loadFromFile("ASSETS/IMAGES/bg.png");
 	bg.setTexture(bgtex);
+	wintex.loadFromFile("ASSETS/IMAGES/wintext.png");
+	win.setTexture(wintex);
 	level.setup();
 	player.Setup();
 }

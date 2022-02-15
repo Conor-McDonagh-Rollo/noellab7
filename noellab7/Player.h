@@ -7,9 +7,7 @@ class Player
 private:
 	sf::Texture tex;
 	sf::Sprite body;
-	bool left = false;
-	bool right = false;
-	bool grounded = false;
+	bool grounded = true;
 	sf::Vector2f vel;
 	
 public:
@@ -19,5 +17,8 @@ public:
 	void ProcessKeys();
 	sf::FloatRect GetBounds() { return body.getGlobalBounds(); }
 	sf::Vector2f GetPosition() { return body.getPosition(); }
+
+	bool dead = false;
+	bool win = false;
 };
 

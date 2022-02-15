@@ -84,6 +84,13 @@ void Player::Update(Level& l)
 					win = true;
 				}
 			}
+			else if (l.levelData[row][col] == 4)
+			{
+				if (below.intersects(l.shape[row][col].getGlobalBounds()) && vel.y > 0)
+				{
+					vel.y *= -1.25f;
+				}
+			}
 			
 		}
 	}

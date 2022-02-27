@@ -3,12 +3,18 @@
 #include "Player.h"
 #include <SFML/Graphics.hpp>
 
+enum class gameState {
+	Game,
+	LevelEditor
+};
+
 class Game
 {
 public:
 	Game();
 	void run();
 private:
+	gameState state;
 
 	void processEvents();
 	void update(sf::Time t_deltaTime);
@@ -28,5 +34,8 @@ private:
 
 	sf::RenderWindow m_window; // main SFML window
 	bool m_exitGame; // control exiting game
+
+	// EDITOR STUFF
+	sf::Vector2f editorOffset;
 };
 

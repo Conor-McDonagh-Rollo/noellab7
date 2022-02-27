@@ -1,8 +1,24 @@
 ﻿  Game.cpp
   Level.cpp
-C:\Users\c00260445\Desktop\noellab7\noellab7\Level.cpp(21,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\c00260445\Desktop\noellab7\noellab7\Level.cpp(21,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\C00260445\Desktop\noel7\noellab7\noellab7\Level.cpp(106,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\C00260445\Desktop\noel7\noellab7\noellab7\Level.cpp(106,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Player.cpp
+C:\Users\C00260445\Desktop\noel7\noellab7\noellab7\Player.cpp(12,104): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\C00260445\Desktop\noel7\noellab7\noellab7\Player.cpp(14,116): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\C00260445\Desktop\noel7\noellab7\noellab7\Player.cpp(15,112): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\C00260445\Desktop\noel7\noellab7\noellab7\Player.cpp(60,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   main.cpp
   Generating Code...
-  noellab7.vcxproj -> C:\Users\c00260445\Desktop\noellab7\Debug\noellab7.exe
+  noellab7.vcxproj -> C:\Users\C00260445\Desktop\noel7\noellab7\Debug\noellab7.exe

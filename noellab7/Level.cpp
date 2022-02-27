@@ -1,5 +1,92 @@
 #include "Level.h"
 #include <iostream>
+Level::Level(sf::RenderWindow& _window) :
+	window{ &_window }, 
+	levels{ Data(76),Data(76),Data(76),
+		Data(76),Data(76),Data(76),
+		Data(76),Data(76),Data(76) }
+{
+	levels[0].data =
+	{
+		{ 0,0,2,1,1,1,1,1,1,1,1,1,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,2,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,2,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,1,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,4,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,1,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,1,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,4,1,1,1,1,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,4,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,4,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 2,1,1,1,0,0,0,1,1,1,1,1,1,1,1 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,4,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,1,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,1,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,1,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,4,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,3,1,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
+		{ 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1 }
+	};
+}
+
 void Level::setup()
 {
 	reset = false;
@@ -7,33 +94,86 @@ void Level::setup()
 	texSpike.loadFromFile("ASSETS/IMAGES/spike.png");
 	texFlag.loadFromFile("ASSETS/IMAGES/flag.png");
 	texBounce.loadFromFile("ASSETS/IMAGES/bounce.png");
-	for (int row = 0; row < numRows; row++)
+	for (int row = 0; row < levels[currentLevel].numRows; row++)
 	{
 		for (int col = 0; col < numCols; col++)
 		{
-			if (levelData[row][col] == 1) shape[row][col].setTexture(&texBlock);
-			if (levelData[row][col] == 2) shape[row][col].setTexture(&texSpike);
-			if (levelData[row][col] == 3) shape[row][col].setTexture(&texFlag);
-			if (levelData[row][col] == 4) shape[row][col].setTexture(&texBounce);
-			if (levelData[row][col] > 0)
+			if (levels[currentLevel].data[row][col] == 1) levels[currentLevel].shape[row][col].setTexture(&texBlock);
+			if (levels[currentLevel].data[row][col] == 2) levels[currentLevel].shape[row][col].setTexture(&texSpike);
+			if (levels[currentLevel].data[row][col] == 3) levels[currentLevel].shape[row][col].setTexture(&texFlag);
+			if (levels[currentLevel].data[row][col] == 4) levels[currentLevel].shape[row][col].setTexture(&texBounce);
+			levels[currentLevel].shape[row][col].setSize(sf::Vector2f(40.f, 40.f));
+			levels[currentLevel].shape[row][col].setPosition(row * 40, col * 40);
+
+			if (row == levels[currentLevel].numRows - 1 && col == numCols - 1)
 			{
-				shape[row][col].setSize(sf::Vector2f(40.f, 40.f));
-				shape[row][col].setPosition(row * 40, col * 40);
+				float width = (levels[currentLevel].shape[row][col].getPosition().x + levels[currentLevel].shape[row][col].getSize().x)
+					- levels[currentLevel].shape[0][0].getPosition().x;
+				placeableArea.width = width;
+				placeableArea.height = 600;
+				placeableArea.top = levels[currentLevel].shape[0][0].getPosition().y;
+				placeableArea.left = levels[currentLevel].shape[0][0].getPosition().x;
 			}
 		}
 	}
 }
 
-void Level::draw(sf::RenderWindow& window)
+void Level::LevelEditor()
 {
-	for (int row = 0; row < numRows; row++)
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		for (int col = 0; col < numCols; col++)
+		sf::Vector2i mouse = sf::Mouse::getPosition(*window);
+		sf::Vector2f mousePos = window->mapPixelToCoords(mouse);
+		if (placeableArea.contains(mousePos))
 		{
-			if (levelData[row][col] > 0)
+			for (int row = 0; row < levels[currentLevel].numRows; row++)
 			{
-				window.draw(shape[row][col]);
+				for (int col = 0; col < numCols; col++)
+				{
+					if (levels[currentLevel].shape[row][col].getGlobalBounds().contains(mousePos))
+					{
+						levels[currentLevel].data[row][col] = 1;
+						levels[currentLevel].shape[row][col].setTexture(&texBlock);
+					}
+				}
+			}
+		}
+	}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	{
+		sf::Vector2i mouse = sf::Mouse::getPosition(*window);
+		sf::Vector2f mousePos = window->mapPixelToCoords(mouse);
+		if (placeableArea.contains(mousePos))
+		{
+			for (int row = 0; row < levels[currentLevel].numRows; row++)
+			{
+				for (int col = 0; col < numCols; col++)
+				{
+					if (levels[currentLevel].shape[row][col].getGlobalBounds().contains(mousePos))
+					{
+						levels[currentLevel].data[row][col] = 0;
+						levels[currentLevel].shape[row][col].setTexture(nullptr);
+					}
+				}
 			}
 		}
 	}
 }
+
+void Level::draw()
+{
+	
+	inView = sf::FloatRect(window->getView().getCenter() - (window->getView().getSize() / 2.f), window->getView().getSize());
+	for (int row = 0; row < levels[currentLevel].numRows; row++)
+	{
+		for (int col = 0; col < numCols; col++)
+		{
+			if (levels[currentLevel].data[row][col] > 0)
+			{
+				if (levels[currentLevel].shape[row][col].getGlobalBounds().intersects(inView)) window->draw(levels[currentLevel].shape[row][col]);
+			}
+		}
+	}
+}
+
+

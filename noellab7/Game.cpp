@@ -1,12 +1,16 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Lab 6" },
-	m_exitGame{ false } //when true game will exit
+	m_exitGame{ false }, //when true game will exit
+	level{ m_window }
 {
+	state = gameState::LevelEditor;
 	setup(); // load texture
 	view.setSize(sf::Vector2f(800.f, 600.f));
 	bg.setOrigin(400.f,300.f);
+	editorOffset = sf::Vector2f(360, 540);
 }
 
 void Game::run()
@@ -38,11 +42,84 @@ void Game::processEvents()
 		{
 			m_exitGame = true;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+
+		switch (state)
 		{
-			setup();
+		case gameState::Game:
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+			{
+				setup();
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace))
+			{
+				state = gameState::LevelEditor;
+			}
+			player.ProcessKeys();
+			break;
+		case gameState::LevelEditor:
+			if (sf::Event::MouseWheelScrolled == newEvent.type)
+			{
+				if (sf::Mouse::VerticalWheel == newEvent.mouseWheelScroll.wheel)
+				{
+					if (newEvent.mouseWheelScroll.delta == 1)
+					{
+						editorOffset.x += 50.f;
+					}
+					else if (newEvent.mouseWheelScroll.delta == -1)
+					{
+						editorOffset.x -= 50.f;
+					}
+				}
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			{
+				state = gameState::Game;
+			}
+			if (sf::Event::KeyReleased == newEvent.type)
+			{
+				switch (newEvent.key.code)
+				{
+				case sf::Keyboard::Num1:
+					level.currentLevel = 0;
+					level.setup();
+					break;
+				case sf::Keyboard::Num2:
+					level.currentLevel = 1;
+					level.setup();
+					break;
+				case sf::Keyboard::Num3:
+					level.currentLevel = 2;
+					level.setup();
+					break;
+				case sf::Keyboard::Num4:
+					level.currentLevel = 3;
+					level.setup();
+					break;
+				case sf::Keyboard::Num5:
+					level.currentLevel = 4;
+					level.setup();
+					break;
+				case sf::Keyboard::Num6:
+					level.currentLevel = 5;
+					level.setup();
+					break;
+				case sf::Keyboard::Num7:
+					level.currentLevel = 6;
+					level.setup();
+					break;
+				case sf::Keyboard::Num8:
+					level.currentLevel = 7;
+					level.setup();
+					break;
+				case sf::Keyboard::Num9:
+					level.currentLevel = 8;
+					level.setup();
+					break;
+				}
+			}
+			break;
 		}
-		player.ProcessKeys();
+		
 	}
 }
 
@@ -53,21 +130,39 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	if (!player.win)
+
+	switch (state)
 	{
-		if (level.reset) setup();
-		player.Update(level);
-		view.setCenter(player.GetPosition().x, 300);
-		bg.setPosition(view.getCenter());
-		if (player.dead)
+	case gameState::Game:
+		if (!player.win)
 		{
-			setup();
+			if (level.reset) setup();
+			player.Update(level);
+			view.setCenter(player.GetPosition().x, 300);
+			if (player.dead)
+			{
+				setup();
+			}
 		}
+		else
+		{
+			win.setPosition(view.getCenter() - sf::Vector2f(win.getGlobalBounds().width / 2, win.getGlobalBounds().height / 2));
+		}
+		break;
+
+	case gameState::LevelEditor:
+		view.setCenter(editorOffset.x, 300);
+		level.LevelEditor();
+		break;
 	}
-	else
+
+	if (view.getCenter().x < 360)
 	{
-		win.setPosition(view.getCenter() - sf::Vector2f(win.getGlobalBounds().width / 2, win.getGlobalBounds().height / 2));
+		view.setCenter(360, 300);
+		editorOffset.x = 360;
 	}
+
+	bg.setPosition(view.getCenter());
 }
 
 // draw the frame and then switch buffers
@@ -77,12 +172,22 @@ void Game::render()
 	m_window.setView(view);
 
 	m_window.draw(bg);
-	level.draw(m_window);
-	player.Draw(m_window);
 
-	if (player.win)
+	switch (state)
 	{
-		m_window.draw(win);
+	case gameState::Game:
+		level.draw();
+		player.Draw(m_window);
+
+		if (player.win)
+		{
+			m_window.draw(win);
+		}
+		break;
+
+	case gameState::LevelEditor:
+		level.draw();
+		break;
 	}
 
 	m_window.display();
